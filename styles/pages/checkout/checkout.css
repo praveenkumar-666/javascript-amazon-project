@@ -149,6 +149,13 @@
 .delivery-option-input {
   margin-left: 0px;
   cursor: pointer;
+  
+}
+
+input[type="radio"]:focus,
+input[type="radio"]:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 .delivery-option-date {
