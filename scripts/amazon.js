@@ -1,5 +1,6 @@
-import { cart } from "../data/cart.js"
+import { cart , addToCart } from "../data/cart.js"
 import { products } from "../data/products.js"
+
 
 let productsHtml = ''
 
@@ -58,36 +59,19 @@ products.forEach((product)=> {
 
 })
 
-document.querySelector('.js-products-grid').innerHTML = productsHtml
-const addedMSgTimeout = {}
-document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
-  button.addEventListener('click',()=>{
-    const productId = button.dataset.productId
-    let matchingItem 
-    let quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`)
-    let quantityValue = Number(quantitySelector.value)
-    cart.forEach((item)=>{
-      if(productId === item.productId){
-        matchingItem = item
-      }
-    })
-      if(matchingItem){
-        matchingItem.quantity += quantityValue
-      }else{
-        cart.push({
-        productId : productId,
-        quantity : quantityValue
-    })}
+function updateCartQuantity(){
+  let cartQuantity = 0
 
-    let cartQuantity = 0
-
-    cart.forEach((items)=>{
-      cartQuantity += items.quantity
+    cart.forEach((cartItem)=>{
+      cartQuantity += cartItem.quantity
     })
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
 
-    const addedMSg = document.querySelector(`.js-added-to-cart-${productId}`)
-    addedMSg.classList.add('added-to-cart-visible')
+}
+
+function cartVisible(productId){
+  const addedMSg = document.querySelector(`.js-added-to-cart-${productId}`)
+  addedMSg.classList.add('added-to-cart-visible')
 
     setTimeout(()=>{
       const previousTimeoutId = addedMSgTimeout[productId]
@@ -99,6 +83,21 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
       },2000)
       addedMSgTimeout[productId] = timeoutId 
     })
+
+}
+
+document.querySelector('.js-products-grid').innerHTML = productsHtml
+const addedMSgTimeout = {}
+document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    const productId = button.dataset.productId
+
+    addToCart(productId)
+
+    updateCartQuantity()
+
+    cartVisible(productId)
+  
   })
 })
 
