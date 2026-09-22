@@ -111,3 +111,13 @@ document.querySelectorAll('.js-delete-link')
     
 
 })
+function updateCheckoutQuantity(){
+   let cartQuantity = 0
+
+    cart.forEach((cartItem)=>{
+      cartQuantity += cartItem.quantity
+    })
+    return cartQuantity
+}
+
+    document.querySelector('.js-checkout-quantity').innerHTML = updateCheckoutQuantity()
