@@ -57,6 +57,7 @@ cart.forEach((cartItems) =>{
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
+
                 ${deliveryOptionHtml(matchingProduct)}
               </div>
             </div>
@@ -77,7 +78,7 @@ let html = ''
     const deliveryString = deliveryDate.format('dddd, MMMM D')
     
 
-    const priceString = deliveryOption.priceCents === 0 ? "FREE" : `$${formatCurrency(deliveryOption.priceCents)}`
+    const priceString = deliveryOption.priceCents === 0 ? "FREE" : `$${formatCurrency(deliveryOption.priceCents)} -`
     html += `
             <div class="delivery-option">
               <input type="radio"
@@ -88,11 +89,11 @@ let html = ''
                   ${deliveryString}
                 </div>
                 <div class="delivery-option-price">
-                  ${priceString} - Shipping
+                  ${priceString}  Shipping
                 </div>
               </div>
             </div>
-          </div>
+          
 
     `
 
