@@ -191,7 +191,7 @@ export function renderOrderSummary(){
             const {productId,deliveryOptionId} = element.dataset
             updateDeliveryOPtion(productId,deliveryOptionId)
             renderOrderSummary()
-            renderPaymentSummary()
+            renderPaymentSummary( )
           })
 
         })
