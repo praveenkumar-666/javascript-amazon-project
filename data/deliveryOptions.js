@@ -38,9 +38,9 @@ export function calculateDeliveryDate(deliveryOption){
    let deliveryDate = dayjs()
    while(remainingDays > 0){
     deliveryDate = deliveryDate.add(1,'days')
-   }
-   if(!isWeekend(deliveryDate)){
-    remainingDays--
+    if(!isWeekend(deliveryDate)){
+      remainingDays--
+    }
    }
 
 

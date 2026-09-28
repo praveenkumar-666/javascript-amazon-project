@@ -2,7 +2,6 @@ import { cart , removeFromCart,calculateCartQuantity,updateQuantity, updateDeliv
 import { products,getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption ,calculateDeliveryDate } from "../../data/deliveryOptions.js";
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
 import { renderPaymentSummary } from "./payment-summary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
   
@@ -158,7 +157,8 @@ export function renderOrderSummary(){
         document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity
 
        renderCheckoutHeader()
-        renderPaymentSummary()
+       renderPaymentSummary()
+       renderOrderSummary()
 
 
         })
