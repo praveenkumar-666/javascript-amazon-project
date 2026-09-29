@@ -1,4 +1,9 @@
-export let cart = JSON.parse(localStorage.getItem('cart')) 
+export let cart
+
+loadFromStorage()
+
+export function loadFromStorage(){
+  cart = JSON.parse(localStorage.getItem('cart')) 
 
     if(!cart){
       cart = [{
@@ -12,6 +17,7 @@ export let cart = JSON.parse(localStorage.getItem('cart'))
       deliveryOptionId:'2'
     }]
     }
+}
 
 
 function saveToStorage(){
@@ -21,24 +27,24 @@ function saveToStorage(){
 export function addToCart(productId){
 
   let matchingItem 
-
-  let quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`)
-  let quantityValue = Number(quantitySelector.value)
     cart.forEach((cartItem)=>{
       if(productId === cartItem.productId){
         matchingItem = cartItem
       }
     })
       if(matchingItem){
-        matchingItem.quantity += quantityValue
+        matchingItem.quantity += 1
       }else{
         cart.push({
         productId : productId,
-        quantity : quantityValue,
+        quantity : 1,
         deliveryOptionId: '1'
     })
   }
+ 
   saveToStorage()
+  
+
 }
 
 export function removeFromCart(productId){
