@@ -35,10 +35,49 @@ class Product{
     return ` ${formatCurrency(this.priceCents)}`
 
   }
-  
+  extraInfoHtml(){
+    return ''
+  }
 }
 
-const product1 = new Product({
+class Clothing extends Product{
+  sizeChartLink
+
+
+  constructor(productDetails){
+    super(productDetails)
+    this.sizeChartLink = productDetails.sizeChartLink
+  }
+
+  extraInfoHtml(){
+    return `
+    <a href="${this.sizeChartLink}" target = "_blank">Size Chart</a>
+    `
+  }
+
+}
+
+const tshirt = new Clothing({
+    id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+    name: "Adults Plain Cotton T-Shirt - 2 Pack",
+    rating: {
+      stars: 4.5,
+      count: 56
+    },
+    priceCents: 799,
+    keywords: [
+      "tshirts",
+      "apparel",
+      "mens"
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
+  })
+
+  console.log(tshirt)
+
+export const products = [{
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
@@ -52,10 +91,7 @@ const product1 = new Product({
       "sports",
       "apparel"
     ]
-  })
-
-
-export const products = [
+  }
   ,
   {
     id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
@@ -145,7 +181,9 @@ export const products = [
       "hoodies",
       "sweaters",
       "apparel"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "77919bbe-0e56-475b-adde-4f24dfed3a04",
@@ -701,6 +739,9 @@ export const products = [
     ]
   }
 ].map((productDetails)=>{
+  if(productDetails.type === "clothing"){
+    return new Clothing(productDetails)
+  }
  return new Product(productDetails)
 })
 
